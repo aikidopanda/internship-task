@@ -13,7 +13,7 @@ CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}}) #the default 
 
 secret_key = secrets.token_hex(16)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:mypassword@localhost:5432/Internship' #add your database settings here
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:redoran16482@localhost:5432/Internship' #add your database settings here
 app.config['JWT_SECRET_KEY'] = secret_key
 app.config['SECRET_KEY'] = secret_key
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -30,6 +30,13 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(80), unique=True, nullable=False)  # Changed from username to email
     password = db.Column(db.String(1000), nullable=False) #extended the string length because hashing method is changed to scrypt
     organization = db.Column(db.Integer, db.ForeignKey('organization.id'), nullable=True)
+
+    def serialize(self):
+        return{
+            'id': self.id,
+            'email': self.email,
+            'organization': self.organization
+        }
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -92,11 +99,19 @@ def user_add():
         if user_to_add:
             user_to_add.organization = active_user.organization
             db.session.commit()
-            return (f'User {user_to_add.email} successfully added to {user_to_add.organization}')
+            return jsonify(f'User {user_to_add.email} successfully added to {user_to_add.organization}')
         else:
-            return ('No such user in the database')
+            return jsonify({'message': 'No such user'})
     else:
-        return("Your organization should be specified to do this")
+        return jsonify({'message': "No such organization"})
+    
+@app.route('/all-users', methods=['GET'])
+def get_all_users():
+    users = User.query.all()
+    users_list = [{'id': user.id, 'email': user.email, 'organization': user.organization_id.name} for user in users]
+    return jsonify({'users': users_list})
+    
+
 
 
 
