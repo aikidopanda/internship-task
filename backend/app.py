@@ -15,7 +15,7 @@ CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
 secret_key = secrets.token_hex(16)
 
 # add your database settings here
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:yourpassword@localhost:5432/Internship'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:yourpassword@localhost:5432/Yourdatabasename'
 app.config['JWT_SECRET_KEY'] = secret_key
 app.config['SECRET_KEY'] = secret_key
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
