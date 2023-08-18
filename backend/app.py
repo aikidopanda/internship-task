@@ -41,10 +41,6 @@ class Organization(db.Model):
     users = db.relationship('User', backref='organization_id', lazy=True)
 
 
-with app.app_context():
-    db.create_all()
-
-
 def is_valid_email(email):
     try:
         valid = validate_email(email)
@@ -62,8 +58,7 @@ def signup():
         return jsonify({"message": "User already exists"})
     if is_valid_email(data['email']) == False:
         return jsonify({"message": "Invalid email"})
-    new_user = User(email=data['email'],
-                    password=hashed_password)  # Modified here
+    new_user = User(email=data['email'], password=hashed_password)  # Modified here
     db.session.add(new_user)
     db.session.commit()
     return jsonify({"message": "User created!"}), 201
@@ -75,8 +70,7 @@ def signin():
     user = User.query.filter_by(email=data['email']).first()  # Modified here
     if not user or not check_password_hash(user.password, data['password']):
         return jsonify({"message": "Invalid email/password!"}), 401
-    access_token = create_access_token(
-        identity=user.email)  # Use email as identity
+    access_token = create_access_token(identity=user.email)  # Use email as identity
     return jsonify({"access_token": access_token})
 
 
@@ -109,7 +103,7 @@ def user_add():
         if user_to_add:
             user_to_add.organization = active_user.organization
             db.session.commit()
-            return jsonify(f'User {user_to_add.email} successfully added to {user_to_add.organization}')
+            return jsonify({'message': f'User {user_to_add.email} successfully added to {user_to_add.organization}'})
         return jsonify({'message': 'No such user'})
     return jsonify({'message': "No such organization"})
 
