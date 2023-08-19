@@ -15,7 +15,7 @@ CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
 secret_key = secrets.token_hex(16)
 
 # add your database settings here
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:yourpassword@localhost:5432/Yourdatabasename'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:yourpassword@localhost:5432/yourdatabase'
 app.config['JWT_SECRET_KEY'] = secret_key
 app.config['SECRET_KEY'] = secret_key
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -103,7 +103,7 @@ def user_add():
         if user_to_add:
             user_to_add.organization = active_user.organization
             db.session.commit()
-            return jsonify({'message': f'User {user_to_add.email} successfully added to {user_to_add.organization}'})
+            return jsonify({'message': f'User {user_to_add.email} successfully added to {user_to_add.organization_id.name}'})
         return jsonify({'message': 'No such user'})
     return jsonify({'message': "No such organization"})
 
@@ -112,7 +112,7 @@ def user_add():
 def get_all_users():
     users = User.query.all()
     users_list = [{'id': user.id, 'email': user.email,
-                   'organization': user.organization_id.name} for user in users]
+                   'organization': user.organization_id.name if user.organization_id else 'No organization'} for user in users]
     return jsonify({'users': users_list})
 
 

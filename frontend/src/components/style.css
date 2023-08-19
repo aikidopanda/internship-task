@@ -1,0 +1,101 @@
+.container-main, .container-profile, .container-allusers{
+    font-size: 20px;
+    text-align: center;
+    height: 50vh;
+    width: 50vw;
+    margin-top: 25vh;
+    margin-bottom: 25vh;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: aliceblue;
+    border: 1px solid black;
+}
+
+.container-profile{
+    height: 80vh;
+    width: 60vw;
+    margin-top: 10vh;
+    margin-bottom: 10vh;
+}
+
+.container-allusers{
+    text-align: left;
+}
+
+.container-allusers h2{
+    text-align: center;
+}
+
+body{
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+}
+
+input{
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 15px;
+}
+
+input:focus{
+    border: 1px solid darkblue;
+    background-color: #ececec;
+}
+
+button{
+  background: darkblue;
+  border: 1px solid darkblue;
+  border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block;
+  font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 16px;
+  min-height: 40px;
+  outline: 0;
+  padding: 10px 12px;
+  text-align: center;
+  text-rendering: geometricprecision;
+  text-transform: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  margin: 10px;
+}
+
+button:hover,
+button:active {
+  background-color: initial;
+  background-position: 0 0;
+  color: darkblue;
+}
+
+button:active {
+  opacity: .5;
+}
+
+@media screen and (max-width: 600px){
+    .container-main, .container-profile, .container-allusers{
+        width: 100vw;
+    }
+    .container-profile{
+        width: 100%;
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-height: 600px){
+    .container-main, .container-profile, .container-allusers{
+        height: 100vh;
+        font-size: 16px;
+    }
+    .container-profile{
+        height: 100%
+    }
+}

@@ -1,26 +1,29 @@
 import { Link } from 'react-router-dom'
+import './style.css'
 
 function MainPage(){
     return(
         <div>
-            <p>
-                To create a new account:
-                <Link to='/signup'>
-                    <button>Sign Up</button>
-                </Link>
-            </p>
-            <p>
-                To log into existing account:
-                <Link to='/signin'>
-                    <button>Sign In</button>
-                </Link>
-            </p>
-            <p>
-                View all users:
-                <Link to='/all-users'>
-                    <button>All users</button>
-                </Link>
-            </p>
+            <div className='container-main'>
+                <p>
+                    Create a new account:<br></br>
+                    <Link to='/signup'>
+                        <button>Sign Up</button>
+                    </Link>
+                </p>
+                <p>
+                    Or log into existing account:<br></br>
+                    <Link to='/signin'>
+                        <button>Sign In</button>
+                    </Link>
+                </p>
+                <p>
+                    View all users:<br></br>
+                    <Link to='/all-users'>
+                        <button>All users</button>
+                    </Link>
+                </p>
+            </div>
         </div>
     )
 }

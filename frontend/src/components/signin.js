@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
+import './style.css'
 
 function SignIn(){
     const [email, setEmail] = useState("");  // Changed from username to email
@@ -26,11 +27,13 @@ function SignIn(){
 
     return(
         <div>
-            <p>Enter your email and password</p>
-            <p><input value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" /> </p> 
-            <p><input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" /></p>
-            <button onClick={handleSignIn}>Sign In</button>
-            <p>{message}</p> 
+            <div className='container-main'>
+                <p>Enter your email and password</p>
+                <p><input value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" /> </p> 
+                <p><input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" /></p>
+                <button onClick={handleSignIn}>Sign In</button>
+                <p>{message}</p> 
+            </div>
         </div>
     )
 }
